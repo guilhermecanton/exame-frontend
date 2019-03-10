@@ -1,0 +1,64 @@
+<br>
+<div style="text-align:center">
+  <h2>Curso</h2>
+</div>
+<div class="margin-left5">
+  <p-dataTable #dataTable [rows]="10" [responsive]="true" [lazy]="true" [style]="{'width':'90%'}"
+    [expandableRows]="true" [totalRecords]="listaCursos?.totalElements" (onLazyLoad)="lazyLoad($event)"
+    emptyMessage="Não há cursos listados" [pageLinks]="3" [first]="0" [value]="listaCursos?.content" [paginator]="true">
+    <p-column header="#" [style]="{'width':'50px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.id}}
+      </ng-template>
+    </p-column>
+    <p-column header="Nome">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.nome}}
+      </ng-template>
+    </p-column>
+    <p-column header="Data Inicio">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.dataInicio | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </p-column>
+    <p-column header="Data Fim">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.dataFim | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </p-column>
+    <p-column header="Ações" [style]="{'width':'80px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        <i class="pi pi-pencil cursor-pointer" (click)="editar(row)"></i>
+        <i class="pi pi-trash cursor-pointer margin-left5" (click)="excluir(row)"></i>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+
+
+  <div class="ui-g margin-top25">
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <input id="float-nome" type="text" size="30" pInputText [(ngModel)]="curso.nome">
+        <label for="float-nome">Nome</label>
+      </span>
+      <br>
+      <span class="ui-float-label margin-top15">
+        <p-calendar id="float-data-inicio" [(ngModel)]="curso.dataInicio" inputStyleClass="width240" [locale]="ptBr" dateFormat="dd/mm/yy">
+        </p-calendar>
+        <label for="float-data-inicio">Data Início</label>
+      </span>
+      <br>
+      <span class="ui-float-label margin-top15">
+        <p-calendar id="float-data-fim" [(ngModel)]="curso.dataFim" inputStyleClass="width240" [locale]="ptBr" dateFormat="dd/mm/yy">
+        </p-calendar>
+        <label for="float-data-fim">Data Fim</label>
+      </span>
+    </div>
+  </div>
+
+  <div class="ui-g-3 margin-top15">
+    <button pButton type="button" label="Salvar" (click)="salvarCurso()"></button>
+    <button pButton type="button" label="Limpar" (click)="limparForm()" class="margin-left30"></button>
+  </div>
+</div>
+<br><br><br><br>

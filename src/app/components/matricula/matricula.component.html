@@ -1,0 +1,83 @@
+<br>
+<div style="text-align:center">
+  <h2>Matrícula</h2>
+</div>
+<div class="margin-left5">
+  <p-dataTable #dataTable [rows]="10" [responsive]="true" [lazy]="true" [style]="{'width':'90%'}"
+    [expandableRows]="true" [totalRecords]="listaMatriculas?.totalElements" (onLazyLoad)="lazyLoad($event)"
+    emptyMessage="Não há matrículas listadas" [pageLinks]="3" [first]="0" [value]="listaMatriculas?.content"
+    [paginator]="true">
+    <p-column header="#" [style]="{'width':'50px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.id}}
+      </ng-template>
+    </p-column>
+    <p-column header="Aluno">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.nomeAluno}}
+      </ng-template>
+    </p-column>
+    <p-column header="Curso">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.nomeCurso}}
+      </ng-template>
+    </p-column>
+    <p-column header="Data Matrícula">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.dataMatricula | date: 'dd/MM/yyyy'}}
+      </ng-template>
+    </p-column>
+    <p-column header="Turno">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.turno | turno}}
+      </ng-template>
+    </p-column>
+    <p-column header="Ações" [style]="{'width':'80px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        <i class="pi pi-pencil cursor-pointer" (click)="editar(row)"></i>
+        <i class="pi pi-trash cursor-pointer margin-left5" (click)="excluir(row)"></i>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+
+
+  <div class="ui-g margin-top25">
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <p-dropdown [options]="listaCursos" [(ngModel)]="matricula.idCurso" placeholder="Selecionar curso">
+        </p-dropdown>
+      </span>
+      <br>
+    </div>
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <p-dropdown [options]="listaAlunos" [(ngModel)]="matricula.idAluno" placeholder="Selecionar aluno">
+        </p-dropdown>
+      </span>
+      <br>
+    </div>
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <div class="ui-g-12">
+          <p-radioButton name="turno1" value="MANHA" label="Manhã" [(ngModel)]="matricula.turno" inputId="opt1">
+          </p-radioButton>
+        </div>
+        <div class="ui-g-12">
+          <p-radioButton name="turno2" value="TARDE" label="Tarde" [(ngModel)]="matricula.turno" inputId="opt2">
+          </p-radioButton>
+        </div>
+        <div class="ui-g-12">
+          <p-radioButton name="turno3" value="NOITE" label="Noite" [(ngModel)]="matricula.turno" inputId="opt3">
+          </p-radioButton>
+        </div>
+      </span>
+      <br>
+    </div>
+  </div>
+
+  <div class="ui-g-3 margin-top15">
+    <button pButton type="button" label="Salvar" (click)="salvarMatricula()"></button>
+    <button pButton type="button" label="Limpar" (click)="limparForm()" class="margin-left30"></button>
+  </div>
+</div>
+<br><br><br><br>

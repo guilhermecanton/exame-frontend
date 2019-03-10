@@ -1,0 +1,56 @@
+<br>
+<div style="text-align:center">
+  <h2>Disciplina</h2>
+</div>
+<div class="margin-left5">
+  <p-dataTable #dataTable [rows]="10" [responsive]="true" [lazy]="true" [style]="{'width':'90%'}"
+    [expandableRows]="true" [totalRecords]="listaDisciplinas?.totalElements" (onLazyLoad)="lazyLoad($event)"
+    emptyMessage="Não há disciplinas listadas" [pageLinks]="3" [first]="0" [value]="listaDisciplinas?.content"
+    [paginator]="true">
+    <p-column header="#" [style]="{'width':'50px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.id}}
+      </ng-template>
+    </p-column>
+    <p-column header="Nome">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.nome}}
+      </ng-template>
+    </p-column>
+    <p-column header="Curso">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        {{row.nomeCurso}}
+      </ng-template>
+    </p-column>
+    <p-column header="Ações" [style]="{'width':'80px', 'text-align':'center'}">
+      <ng-template let-col let-row="rowData" pTemplate="body">
+        <i class="pi pi-pencil cursor-pointer" (click)="editar(row)"></i>
+        <i class="pi pi-trash cursor-pointer margin-left5" (click)="excluir(row)"></i>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+
+
+  <div class="ui-g margin-top25">
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <input id="float-nome" type="text" size="30" pInputText [(ngModel)]="disciplina.nome">
+        <label for="float-nome">Nome</label>
+      </span>
+      <br>
+    </div>
+    <div class="ui-g-3">
+      <span class="ui-float-label margin-top15">
+        <p-dropdown [options]="listaCursos" [(ngModel)]="disciplina.idCurso" placeholder="Selecionar curso">
+        </p-dropdown>
+      </span>
+      <br>
+    </div>
+  </div>
+,
+  <div class="ui-g-3 margin-top15">
+    <button pButton type="button" label="Salvar" (click)="salvarDisciplina()"></button>
+    <button pButton type="button" label="Limpar" (click)="limparForm()" class="margin-left30"></button>
+  </div>
+</div>
+<br><br><br><br>
