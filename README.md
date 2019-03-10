@@ -9,7 +9,7 @@ Premissas
 
 * Nodejs instalado
 
-Para subir o cliente, utilizar os seguintes comandos dentro do diretório cliente:
+Para subir o cliente, utilizar os seguintes comandos dentro do diretório raíz do projeto:
 
     $ npm install 
     $ npm start
